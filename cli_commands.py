@@ -21,7 +21,7 @@ def get_connection():
                            database="redbull-tracker")
 
 
-def list_flavours(args):
+def list_flavours():
     try:
         connection = get_connection()
     except (Exception, Error) as error:
@@ -33,15 +33,30 @@ def list_flavours(args):
         cursor.execute("SELECT naam FROM flavours")
         records = cursor.fetchall()
     
-        for record in records:
-            print(record[0])
+        return records
     finally:
         cursor.close()
         connection.close()
 
+def amount_flavours():
+    try:
+        connection = get_connection()
+    except (Exception, Error) as error:
+        print("Error while connecting to PostgreSQL", error)
+        return
+
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT naam FROM flavours")
+        records = cursor.fetchall()
+        return len(records)
+        
+    finally:
+        cursor.close()
+        connection.close()   
 
 
-def list_entries(args):
+def list_entries():
     try:
         connection = get_connection()
     except (Exception, Error) as error:
@@ -60,7 +75,7 @@ def list_entries(args):
         cursor.close()
         connection.close()
 
-def amount_spent(args):
+def amount_spent():
     try:
         connection = get_connection()
     except (Exception, Error) as error:
@@ -78,21 +93,4 @@ def amount_spent(args):
         cursor.close()
         connection.close()
 
-
-def register(subparsers):
-    p1 = subparsers.add_parser(
-        "flavours",
-        help="list all added flavours",
-        description="list all added flavours",
-        aliases=["lf"])
-    p1.set_defaults(func=list_flavours)
-
-    p2 = subparsers.add_parser(
-        "entries",
-        help="Provides a list of all added entries",
-        description="list all entries",
-        aliases=["le"]
-    )
-
-    p2.set_defaults(func=list_entries)
 
