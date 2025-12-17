@@ -75,6 +75,26 @@ def list_entries():
         cursor.close()
         connection.close()
 
+def get_entry_total(flavour):
+    try:
+        connection = get_connection()
+    except (Exception, Error) as error:
+        print("Error while connecting to PostgreSQL", error)
+        return
+    
+    try:
+        cursor = connection.cursor()
+        cursor.execute("""
+                           SELECT COUNT(entry_id) FROM ENTRIES
+                           WHERE flavour = %s;
+                       """,
+                       (flavour,))
+        records = cursor.fetchall()
+        return records[0][0]
+    finally:
+        cursor.close()
+        connection.close()
+    
 def amount_spent():
     try:
         connection = get_connection()
