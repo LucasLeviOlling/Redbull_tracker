@@ -14,3 +14,44 @@ wheels/
 
 #Personal credentials
 cred.py
+
+# Go build artifacts
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go coverage files
+*.cover
+*.coverprofile
+coverage.out
+
+# Go workspace files
+# Uncomment if you don't want to commit Go workspaces
+# go.work
+# go.work.sum
+
+# Fyne / GUI build artifacts
+*.app
+*.apk
+*.aab
+*.ipa
+*.dmg
+*.pkg
+
+# fyne-cross build directories
+fyne-cross/dist/
+fyne-cross/bin/
+fyne-cross/tmp/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.iml
+
+# Logs
+*.log
