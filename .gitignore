@@ -55,3 +55,7 @@ fyne-cross/tmp/
 
 # Logs
 *.log
+
+
+# MacOS specifics
+.DS_Store
